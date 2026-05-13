@@ -30,7 +30,88 @@
     <main class="container mt-4">
         <h1>About Us</h1>
         <p>Somos un equipo de estudiantes decididos a crear una app que habla sobre el narcotráfico, evitando el uso de drogas para un mejor mundo.</p>
-       <img src="https://files.catbox.moe/yourimage.png"
+     <!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Ink Logo</title>
+
+<style>
+
+body{
+    margin:0;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:#000;
+    overflow:hidden;
+}
+
+/* LOGO */
+
+.logo{
+    width:430px;
+
+    filter:
+    grayscale(1)
+    contrast(260%)
+    brightness(1.1)
+    sepia(1)
+    saturate(9000%)
+    hue-rotate(-50deg);
+
+    mix-blend-mode:screen;
+
+    animation: pulse 4s infinite ease-in-out;
+}
+
+/* glow */
+
+.logo::after{
+    content:"";
+    position:absolute;
+}
+
+/* animation */
+
+@keyframes pulse{
+    0%{
+        transform:scale(1);
+    }
+
+    50%{
+        transform:scale(1.03);
+    }
+
+    100%{
+        transform:scale(1);
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<img class="logo"
+src="https://i.imgur.com/8uQ1D6N.png">
+
+</body>
+</html>
+style="
+width:300px;
+mix-blend-mode:screen;
+filter:
+grayscale(1)
+contrast(300%)
+brightness(120%)
+sepia(1)
+hue-rotate(-50deg)
+saturate(900%);
+">
 style="
 width:300px;
 mix-blend-mode:screen;
