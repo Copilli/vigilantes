@@ -129,11 +129,143 @@ img:hover {
 /* Estilos para iframe del formulario */
 iframe {
     border: 2px solid var(--primary-red);
-    border-radius: 8px;
-    background: rgba(0, 0, 0, 0.3);
+    border-radius: 18px;
+    background: rgba(0, 0, 0, 0.35);
     margin: 20px auto;
     display: block;
-    box-shadow: 0 0 20px rgba(220, 20, 60, 0.3);
+    box-shadow: 0 0 30px rgba(220, 20, 60, 0.35);
+    width: 100%;
+    max-width: 900px;
+}
+
+/* Sección hero y tarjetas */
+.hero {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-text {
+    position: relative;
+    z-index: 1;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: -40px;
+    right: -40px;
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    background: rgba(220, 20, 60, 0.25);
+    filter: blur(20px);
+}
+
+.hero::after {
+    content: '';
+    position: absolute;
+    bottom: -40px;
+    left: -40px;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.12);
+    filter: blur(14px);
+}
+
+.eyebrow {
+    display: inline-block;
+    margin-bottom: 15px;
+    color: var(--white);
+    font-size: 14px;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    opacity: 0.85;
+}
+
+.cta-button {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 12px 26px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #ff4d6d, #ff937a);
+    color: var(--black) !important;
+    font-weight: 700;
+    text-transform: uppercase;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px rgba(255, 77, 109, 0.35);
+    color: #0a0a0a !important;
+}
+
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 18px;
+}
+
+.team-card {
+    padding: 22px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.04);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+    transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.team-card:hover {
+    transform: translateY(-6px);
+    background: rgba(220, 20, 60, 0.15);
+}
+
+.team-card h3 {
+    margin-bottom: 12px;
+    color: #ffb3c1;
+}
+
+.team-card p {
+    margin: 0;
+    color: #f2f2f2;
+    line-height: 1.7;
+}
+
+.form-section {
+    position: relative;
+    padding: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    background: rgba(0, 0, 0, 0.22);
+    box-shadow: inset 0 0 50px rgba(255, 255, 255, 0.03);
+}
+
+.accent-shape {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(25px);
+    opacity: 0.55;
+    pointer-events: none;
+}
+
+.shape-1 {
+    width: 240px;
+    height: 240px;
+    top: -90px;
+    left: -90px;
+    background: rgba(255, 77, 109, 0.12);
+}
+
+.shape-2 {
+    width: 180px;
+    height: 180px;
+    bottom: -70px;
+    right: -70px;
+    background: rgba(255, 255, 255, 0.08);
 }
 
 /* Scroll personalizado */
