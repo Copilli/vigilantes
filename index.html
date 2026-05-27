@@ -11,6 +11,18 @@
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
     <title>Document</title>
+    <script>
+        // Redirigir a la presentación al cargar la app, salvo que el usuario la haya saltado
+        try {
+            const skipped = localStorage.getItem('skipPresentation') === 'true'
+            if (!skipped) {
+                window.location.href = './presentacion.html'
+            }
+        } catch (e) {
+            // Si localStorage no está disponible, redirige por defecto
+            window.location.href = './presentacion.html'
+        }
+    </script>
 </head>
 
 <body>
@@ -18,9 +30,6 @@
         style="--bs-nav-link-color: var(--bs-white); --bs-nav-pills-link-active-color: var(--bs-primary); --bs-nav-pills-link-active-bg: var(--bs-white);">
         <li class="nav-item" role="presentation">
             <a class="nav-link active rounded-5" id="home-tab2" href="./index.html" aria-current="page">Sobre Nosotros</a>
-        </li>
-        <li class="nav-item" role="presentation">
-            <a class="nav-link rounded-5" id="presentation-tab" href="./presentacion.html">Presentación</a>
         </li>
         <li class="nav-item" role="presentation">
             <a class="nav-link rounded-5" id="profile-tab2" href="./info/info.html">Información</a>
