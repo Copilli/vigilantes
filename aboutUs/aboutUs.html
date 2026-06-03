@@ -53,14 +53,129 @@
         </section>
 
         <section id="formulario" class="form-section">
-            <h2>¡¡Responde este cuestionario, por favor!!</h2>
-            <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSc4iFIvZgybiETjZ1V38rQtvdV0ciVP9vslWbd9OaoT4r8N9Q/viewform?embedded=true" width="800" height="1288" frameborder="0" marginheight="10" marginwidth="0">Loading…</iframe>
+            <h2>¡Pon a prueba tus conocimientos!</h2>
+            <p class="quiz-intro">Selecciona la respuesta correcta sobre la prevención de drogas. Al finalizar verás tu resultado inmediato.</p>
+
+            <div class="quiz-card">
+                <div class="quiz-question" id="quizQuestion">¿Cuál es una forma importante de decir “no” al consumo de drogas?</div>
+                <div class="quiz-options" id="quizOptions">
+                    <button class="btn quiz-option w-100 text-start mb-2" type="button" data-answer="0">Aceptar por amistad</button>
+                    <button class="btn quiz-option w-100 text-start mb-2" type="button" data-answer="1">Buscar apoyo y decir claramente que no</button>
+                    <button class="btn quiz-option w-100 text-start mb-2" type="button" data-answer="0">Probar una vez para no defraudar</button>
+                </div>
+                <div class="quiz-feedback" id="quizFeedback"></div>
+                <button class="btn btn-outline-light mt-3" id="nextQuestionBtn" type="button" style="display:none">Siguiente pregunta</button>
+            </div>
         </section>
 
         <div class="accent-shape shape-1"></div>
         <div class="accent-shape shape-2"></div>
     </main>
 
+    <script>
+        const quizData = [
+            {
+                question: '¿Cuál es una forma importante de decir “no” al consumo de drogas?',
+                options: ['Aceptar por amistad', 'Buscar apoyo y decir claramente que no', 'Probar una vez para no defraudar'],
+                correctIndex: 1
+            },
+            {
+                question: '¿Qué ayuda a tomar mejores decisiones frente al consumo?',
+                options: ['Informarse y hablar con alguien de confianza', 'Ocultar el problema', 'Seguir a cualquiera'],
+                correctIndex: 0
+            },
+            {
+                question: '¿Por qué es importante evitar las drogas?',
+                options: ['Porque no afecta tu salud', 'Porque puede causar daño físico y emocional', 'Porque es divertido'],
+                correctIndex: 1
+            }
+        ];
+
+        const questionEl = document.getElementById('quizQuestion');
+        const optionsEl = document.getElementById('quizOptions');
+        const feedbackEl = document.getElementById('quizFeedback');
+        const nextBtn = document.getElementById('nextQuestionBtn');
+
+        let currentQuestion = 0;
+        let score = 0;
+        let answered = false;
+
+        function loadQuestion() {
+            answered = false;
+            feedbackEl.textContent = '';
+            feedbackEl.className = 'quiz-feedback';
+            const current = quizData[currentQuestion];
+            questionEl.textContent = current.question;
+            optionsEl.innerHTML = current.options
+                .map((option, index) => `
+                    <button class="btn quiz-option w-100 text-start mb-2" type="button" data-answer="${index}">
+                        ${option}
+                    </button>
+                `)
+                .join('');
+
+            document.querySelectorAll('.quiz-option').forEach(button => {
+                button.addEventListener('click', handleAnswer);
+            });
+
+            nextBtn.style.display = 'none';
+            nextBtn.textContent = currentQuestion < quizData.length - 1 ? 'Siguiente pregunta' : 'Ver resultado';
+        }
+
+        function handleAnswer(event) {
+            if (answered) return;
+            answered = true;
+            const selectedIndex = Number(event.currentTarget.dataset.answer);
+            const isCorrect = selectedIndex === quizData[currentQuestion].correctIndex;
+
+            if (isCorrect) {
+                score += 1;
+                feedbackEl.textContent = '¡Correcto! Excelente elección.';
+                feedbackEl.classList.add('correct');
+            } else {
+                feedbackEl.textContent = 'Casi... esta no es la mejor opción. Intenta la siguiente pregunta.';
+                feedbackEl.classList.add('incorrect');
+            }
+
+            nextBtn.style.display = 'inline-block';
+        }
+
+        function showResult() {
+            questionEl.textContent = '¡Has completado el cuestionario!';
+            optionsEl.innerHTML = '';
+            feedbackEl.textContent = `Tu puntaje fue ${score} de ${quizData.length}. Gracias por participar.`;
+            feedbackEl.className = 'quiz-feedback final';
+            nextBtn.textContent = 'Volver a intentar';
+            nextBtn.style.display = 'inline-block';
+            nextBtn.removeEventListener('click', handleNext);
+            nextBtn.addEventListener('click', resetQuiz);
+        }
+
+        function handleNext() {
+            if (!answered) {
+                feedbackEl.textContent = 'Elige una respuesta antes de continuar.';
+                feedbackEl.className = 'quiz-feedback warning';
+                return;
+            }
+            currentQuestion += 1;
+            if (currentQuestion < quizData.length) {
+                loadQuestion();
+            } else {
+                showResult();
+            }
+        }
+
+        function resetQuiz() {
+            currentQuestion = 0;
+            score = 0;
+            nextBtn.removeEventListener('click', resetQuiz);
+            nextBtn.addEventListener('click', handleNext);
+            loadQuestion();
+        }
+
+        nextBtn.addEventListener('click', handleNext);
+        loadQuestion();
+    </script>
 </body>
 
 </html>
